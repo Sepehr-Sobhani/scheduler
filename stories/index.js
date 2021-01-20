@@ -10,6 +10,10 @@ import DayListItem from "components/DayListItem";
 import DayList from "components/DayList";
 import InterviewerListItem from "components/InterviewerListItem";
 import InterviewerList from "components/InterviewerList";
+import Appoitment from "components/Appointment";
+import Header from "components/Appointment/Header";
+import Empty from "components/Appointment/Empty";
+import Show from "components/Appointment/Show";
 
 // -----------------------------Button-------------------------------
 storiesOf("Button", module)
@@ -128,5 +132,22 @@ storiesOf("InterviewerList", module)
       interviewers={interviewers}
       value={3}
       onChange={action("onChange")}
+    />
+  ));
+// -----------------------------Appointment-------------------------------
+storiesOf("Appointment", module)
+  .addParameters({
+    backgrounds: [{ name: "white", value: "fff", default: true }],
+  })
+  .add("Appointment", () => <Appoitment />)
+  .add("Appointment with Time", () => <Appoitment time="12pm" />)
+  .add("Header", () => <Header time="12pm" />)
+  .add("Empty", () => <Empty onAdd={action("onAdd")} />)
+  .add("Show", () => (
+    <Show
+      student={"Lydia Miller-Jones"}
+      interviewer={interviewers[0].name}
+      onEdit={action("onEdit")}
+      onDelete={action("onDelete")}
     />
   ));
