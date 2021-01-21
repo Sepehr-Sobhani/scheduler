@@ -11,3 +11,13 @@ export function getAppointmentsForDay(state, day) {
   }
   return appointmentsArray;
 }
+
+export function getInterview(state, interview) {
+  let interviewObj = null;
+  for (const key in state.interviewers) {
+    if (interview && state.interviewers[key].id === interview.interviewer) {
+      interviewObj = { ...interview, interviewer: state.interviewers[key] };
+    }
+  }
+  return interviewObj;
+}
