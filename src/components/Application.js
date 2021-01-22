@@ -10,6 +10,7 @@ import {
 } from "helpers/selectors";
 
 export default function Application() {
+  //-------------Application Local State---------------------------
   const [state, setState] = useState({
     day: "Monday",
     days: [],
@@ -17,8 +18,29 @@ export default function Application() {
     interviewers: {},
   });
 
+  //----------------book an interview with the id of the appointment-----------------------
+  function bookInterview(id, interview) {
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview },
+    };
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment,
+    };
+    setState({ ...state, appointments });
+    const newAppointment = axios.put(`/api/appointments/${id}`, {
+      interview,
+    });
+    return newAppointment;
+  }
+
+  //-------------Selector to get appointments for a specific day---------------------------
   const dailyAppointments = getAppointmentsForDay(state, state.day);
+
+  //-------------Selector to get interviewers for a specific day---------------------------
   const interviewers = getInterviewersForDay(state, state.day);
+
   const schedule = dailyAppointments.map((appointment) => {
     const interviewObj = getInterview(state, appointment.interview);
     return (
@@ -27,6 +49,7 @@ export default function Application() {
         key={appointment.id}
         interview={interviewObj}
         interviewers={interviewers}
+        bookInterview={bookInterview}
       />
     );
   });
