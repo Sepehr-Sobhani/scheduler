@@ -29,10 +29,27 @@ export default function Application() {
       [id]: appointment,
     };
     setState({ ...state, appointments });
-    const newAppointment = axios.put(`/api/appointments/${id}`, {
+    const updAppointment = axios.put(`/api/appointments/${id}`, {
       interview,
     });
-    return newAppointment;
+    return updAppointment;
+  }
+
+  //------------------cancel an interview with the id of the appointment-------------------
+  function cancelInterview(id) {
+    const appointment = {
+      ...state.appointments[id],
+      interview: null,
+    };
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment,
+    };
+    setState({ ...state, appointments });
+    const delAppointment = axios.delete(`/api/appointments/${id}`, {
+      interview: null,
+    });
+    return delAppointment;
   }
 
   //-------------Selector to get appointments for a specific day---------------------------
@@ -50,6 +67,7 @@ export default function Application() {
         interview={interviewObj}
         interviewers={interviewers}
         bookInterview={bookInterview}
+        cancelInterview={cancelInterview}
       />
     );
   });
