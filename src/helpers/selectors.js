@@ -30,11 +30,12 @@ export function getInterviewersForDay(state, day) {
 
 //-----------takes state and interview object then returns an object with the interviewer data and student name---------------
 export function getInterview(state, interview) {
-  let interviewObj = null;
-  for (const key in state.interviewers) {
-    if (interview && state.interviewers[key].id === interview.interviewer) {
-      interviewObj = { ...interview, interviewer: state.interviewers[key] };
-    }
+  if (!interview) {
+    return null;
   }
-  return interviewObj;
+  const newInterview = {
+    ...interview,
+    interviewer: { ...state.interviewers[interview.interviewer] },
+  };
+  return newInterview;
 }

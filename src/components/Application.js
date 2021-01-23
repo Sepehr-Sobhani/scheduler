@@ -41,15 +41,18 @@ export default function Application() {
       ...state.appointments[id],
       interview: null,
     };
+
     const appointments = {
       ...state.appointments,
       [id]: appointment,
     };
-    setState({ ...state, appointments });
-    const delAppointment = axios.delete(`/api/appointments/${id}`, {
-      interview: null,
+
+    return axios.delete(`/api/appointments/${id}`).then((res) => {
+      setState({
+        ...state,
+        appointments,
+      });
     });
-    return delAppointment;
   }
 
   //-------------Selector to get appointments for a specific day---------------------------
@@ -59,12 +62,11 @@ export default function Application() {
   const interviewers = getInterviewersForDay(state, state.day);
 
   const schedule = dailyAppointments.map((appointment) => {
-    const interviewObj = getInterview(state, appointment.interview);
     return (
       <Appointment
-        {...appointment}
         key={appointment.id}
-        interview={interviewObj}
+        {...appointment}
+        interview={getInterview(state, appointment.interview)}
         interviewers={interviewers}
         bookInterview={bookInterview}
         cancelInterview={cancelInterview}
