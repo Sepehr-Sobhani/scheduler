@@ -20,11 +20,26 @@ function useApplicationData() {
       ...state.appointments,
       [id]: appointment,
     };
-    setState({ ...state, appointments });
-    const updAppointment = axios.put(`/api/appointments/${id}`, {
-      interview,
-    });
-    return updAppointment;
+
+    //------------------update remaining spots by taking id of interview and list of days----------------
+    let days = state.days;
+    if (!state.appointments[id].interview) {
+      days = state.days.map((day) => {
+        const dayDetail = { ...day };
+        if (dayDetail.appointments.includes(id)) {
+          dayDetail.spots--;
+          return dayDetail;
+        } else {
+          return dayDetail;
+        }
+      });
+    }
+
+    return axios
+      .put(`/api/appointments/${id}`, {
+        interview,
+      })
+      .then(() => setState({ ...state, appointments, days }));
   }
 
   //------------------cancel an interview with the id of the appointment-------------------
@@ -39,10 +54,22 @@ function useApplicationData() {
       [id]: appointment,
     };
 
+    //------------------update remaining spots by taking id of interview and list of days----------------
+    const days = state.days.map((day) => {
+      const dayDetail = { ...day };
+      if (dayDetail.appointments.includes(id)) {
+        dayDetail.spots++;
+        return dayDetail;
+      } else {
+        return dayDetail;
+      }
+    });
+
     return axios.delete(`/api/appointments/${id}`).then((res) => {
       setState({
         ...state,
         appointments,
+        days,
       });
     });
   }
