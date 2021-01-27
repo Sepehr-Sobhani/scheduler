@@ -64,9 +64,7 @@ function useApplicationData() {
       axios.get(daysURL),
       axios.get(appointmentsURL),
       axios.get(interviewersURL),
-    ])
-      .then((all) => dispatch({ type: SET_APPLICATION_DATA, value: all }))
-      .catch((err) => console.log(err));
+    ]).then((all) => dispatch({ type: SET_APPLICATION_DATA, value: all }));
   }, []);
 
   return { state, setDay, bookInterview, cancelInterview };

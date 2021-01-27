@@ -171,7 +171,9 @@ describe("Application", () => {
     expect(getByText(appointment, "Saving")).toBeInTheDocument();
 
     // 8. Wait until the element with the text "Error" is displayed.
-    await waitForElement(() => getByText(appointment, "Error"));
+    await waitForElement(() =>
+      getByText(appointment, "Error Saving Appointment")
+    );
 
     // 9. Check that the element with the text "Error Saving Appointment" is displayed.
     expect(
@@ -214,7 +216,9 @@ describe("Application", () => {
     expect(getByText(appointment, "Deleting")).toBeInTheDocument();
 
     // 7. Wait until the element with the text "Error" is displayed.
-    await waitForElement(() => getByText(appointment, "Error"));
+    await waitForElement(() =>
+      getByText(appointment, "Error Deleting Appointment")
+    );
 
     // 8. Check that the element with the text "Error Deleting Appointment" is displayed.
     expect(
