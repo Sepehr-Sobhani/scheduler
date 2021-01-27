@@ -83,12 +83,14 @@ export default {
     }
   }),
   put: jest.fn((url) => {
+    /* Resolve put method */
     return Promise.resolve({
       status: 204,
       statusText: "No Content",
     });
   }),
   delete: jest.fn((url) => {
+    /* Resolve delete method */
     return Promise.resolve({
       status: 204,
       statusText: "No Content",

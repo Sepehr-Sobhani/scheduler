@@ -35,8 +35,7 @@ function useApplicationData() {
         interview,
       })
       .then(() => dispatch({ type: SET_INTERVIEW, value: appointments }))
-      .then(() => dispatch({ type: UPDATE_SPOTS }))
-      .catch((err) => console.log(err));
+      .then(() => dispatch({ type: UPDATE_SPOTS }));
   }
   //------------------cancel an interview with the id of the appointment-------------------
   function cancelInterview(id) {
@@ -53,8 +52,7 @@ function useApplicationData() {
     return axios
       .delete(`/api/appointments/${id}`)
       .then(() => dispatch({ type: SET_INTERVIEW, value: appointments }))
-      .then(() => dispatch({ type: UPDATE_SPOTS }))
-      .catch((err) => console.log(err));
+      .then(() => dispatch({ type: UPDATE_SPOTS }));
   }
 
   //-------------------fetch data from db with axios--------------------------
