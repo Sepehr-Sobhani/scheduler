@@ -41,8 +41,8 @@ export default function Appointment(props) {
   }
 
   //--------------------------------delete an interview with the appointment id-----------------------------
-  function cancel() {
-    transition(DELETING, true);
+  function destroy() {
+    transition(DELETING);
     props
       .cancelInterview(props.id)
       .then(() => transition(EMPTY))
@@ -81,7 +81,7 @@ export default function Appointment(props) {
         <Confirm
           message={"Are you sure you would like to delete?"}
           onCancel={back}
-          onConfirm={cancel}
+          onConfirm={destroy}
         />
       )}
       {mode === ERROR_DELETE && (
