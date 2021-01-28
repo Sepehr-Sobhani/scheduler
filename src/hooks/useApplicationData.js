@@ -16,6 +16,31 @@ function useApplicationData() {
     interviewers: {},
   });
 
+  //-------------------fetch data from db with axios--------------------------
+  useEffect(() => {
+    const daysURL = "/api/days";
+    const appointmentsURL = "/api/appointments";
+    const interviewersURL = "/api/interviewers";
+    Promise.all([
+      axios.get(daysURL),
+      axios.get(appointmentsURL),
+      axios.get(interviewersURL),
+    ]).then((all) => dispatch({ type: SET_APPLICATION_DATA, value: all }));
+
+    const webSocket = new WebSocket(process.env.REACT_APP_WEBSOCKET_URL);
+
+    webSocket.onmessage = (event) => {
+      const data = JSON.parse(event.data);
+      if (data.type === "SET_INTERVIEW") {
+        const appId = data.id;
+        dispatch({ type: "SET_INTERVIEW", value: appId });
+      }
+    };
+    return () => {
+      webSocket.close();
+    };
+  }, []);
+
   //------------------logic to change the day----------------------------------------------
   const setDay = (day) => dispatch({ type: SET_DAY, value: day });
 
@@ -54,18 +79,6 @@ function useApplicationData() {
       .then(() => dispatch({ type: SET_INTERVIEW, value: appointments }))
       .then(() => dispatch({ type: UPDATE_SPOTS }));
   }
-
-  //-------------------fetch data from db with axios--------------------------
-  useEffect(() => {
-    const daysURL = "/api/days";
-    const appointmentsURL = "/api/appointments";
-    const interviewersURL = "/api/interviewers";
-    Promise.all([
-      axios.get(daysURL),
-      axios.get(appointmentsURL),
-      axios.get(interviewersURL),
-    ]).then((all) => dispatch({ type: SET_APPLICATION_DATA, value: all }));
-  }, []);
 
   return { state, setDay, bookInterview, cancelInterview };
 }
