@@ -6,7 +6,7 @@ Tech Stack: ReactJS, PostgreSQL, Webpack, Axios, WebSockets, Jest, React Testing
 
 ## Final Project
 
-!["Final Project GIF"]("https://github.com/Sepehr-Sobhani/scheduler/blob/master/docs/Peek%202021-01-28%2000-59.gif)
+!["Final Project GIF"](https://github.com/Sepehr-Sobhani/scheduler/blob/master/docs/Peek%202021-01-28%2000-59.gif)
 
 ## Setup
 
