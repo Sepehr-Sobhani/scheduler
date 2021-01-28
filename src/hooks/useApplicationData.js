@@ -26,19 +26,6 @@ function useApplicationData() {
       axios.get(appointmentsURL),
       axios.get(interviewersURL),
     ]).then((all) => dispatch({ type: SET_APPLICATION_DATA, value: all }));
-
-    const webSocket = new WebSocket(process.env.REACT_APP_WEBSOCKET_URL);
-
-    webSocket.onmessage = (event) => {
-      const data = JSON.parse(event.data);
-      if (data.type === "SET_INTERVIEW") {
-        const appId = data.id;
-        dispatch({ type: "SET_INTERVIEW", value: appId });
-      }
-    };
-    return () => {
-      webSocket.close();
-    };
   }, []);
 
   //------------------logic to change the day----------------------------------------------
