@@ -33,13 +33,12 @@ function useApplicationData() {
 
   //----------------book an interview with the id of the appointment-----------------------
   function bookInterview(id, interview) {
-    const appointment = {
-      ...state.appointments[id],
-      interview: { ...interview },
-    };
     const appointments = {
       ...state.appointments,
-      [id]: appointment,
+      [id]: {
+        ...state.appointments[id],
+        interview,
+      },
     };
 
     return axios
@@ -51,14 +50,12 @@ function useApplicationData() {
   }
   //------------------cancel an interview with the id of the appointment-------------------
   function cancelInterview(id) {
-    const appointment = {
-      ...state.appointments[id],
-      interview: null,
-    };
-
     const appointments = {
       ...state.appointments,
-      [id]: appointment,
+      [id]: {
+        ...state.appointments[id],
+        interview: null,
+      },
     };
 
     return axios
