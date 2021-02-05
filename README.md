@@ -2,7 +2,7 @@
 
 :calendar::calendar::calendar:Interview Scheduler is a Single Page Application built using React that allows users to book and cancel interviews. A concise API is combined with a WebSocket server to build a realtime experience.:calendar::calendar::calendar:
 
-Tech Stack: ReactJS, PostgreSQL, Webpack, Axios, WebSockets, Jest, React Testing Library, Storybook, Cypress
+**Tech Stack:** ReactJS, PostgreSQL, Webpack, Axios, WebSockets, Jest, React Testing Library, Storybook, Cypress
 
 **Checkout Live Project** [here](https://601cff9a2e62899c8b9b4151--nervous-aryabhata-bed899.netlify.app)
 (Please wait a moment for heroku server to warm up and loads the data)
