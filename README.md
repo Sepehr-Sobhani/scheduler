@@ -4,7 +4,7 @@
 
 Tech Stack: ReactJS, PostgreSQL, Webpack, Axios, WebSockets, Jest, React Testing Library, Storybook, Cypress
 
-Live Project [here] (https://601cff9a2e62899c8b9b4151--nervous-aryabhata-bed899.netlify.app/)
+Live Project [here] (https://601cff9a2e62899c8b9b4151--nervous-aryabhata-bed899.netlify.app)
 (Please wait a moment for heroku server to warm up and loads the data)
 
 ## Final Project
